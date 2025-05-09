@@ -55,7 +55,34 @@ namespace ExportToExcel.Controllers
                 new Products {Id = 20, Name = "SpectraPad", Description = "10-inch OLED Tablet with Stylus", Price = 400m}
             };
 
-            
+            var filteredData = products.OrderBy(x => x.Id).ToList();
+
+            var lines = new List<string>();
+            lines.Add(
+                "ID" + "," +
+                "Name" + "," +
+                "Description" + "," +
+                "Price");
+
+            for (int i = 0; i < filteredData.Count; i++)
+            {
+                lines.Add(
+                    filteredData[i].Id.ToString() + "," +
+                    filteredData[i].Name.ToString() + "," +
+                    filteredData[i].Description.ToString() + "," +
+                    filteredData[i].Price.ToString());
+            }
+
+            string csv = "";
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                csv = csv + lines[i] + "\n";
+            }
+
+            string fileName = $"ExportToExcel_{DateTime.Now:yyyy-MM-dd_HH-mm}.csv";
+
+            return File(Encoding.UTF8.GetBytes(csv), "text/csv", fileName);
         }
     }
 }
