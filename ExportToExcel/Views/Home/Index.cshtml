@@ -16,7 +16,7 @@
 
             @using (Html.BeginForm("ExportDataToExcel", "Home", FormMethod.Post, new { id = "exportForm" }))
             {
-                @Html.AntiForgeryToken() <!-- اضافه کردن این خط -->
+                @Html.AntiForgeryToken()
                 <button type="submit" class="btn btn-excel">
                     <i class="fa fa-download"></i> Generate Excel File
                 </button>
